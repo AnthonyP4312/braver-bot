@@ -1,3 +1,6 @@
+import commands from './commands'
+import { Message } from 'discord.js'
+
 export const enum TextCommands {
   PING,
   PLAY,
@@ -11,6 +14,6 @@ export const enum ReactionCommands {
   DELETE
 }
 
-export default function () {
-
+export default function (msg: Message) {
+  commands.play(msg)
 }
