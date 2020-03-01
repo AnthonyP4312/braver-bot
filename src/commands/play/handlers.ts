@@ -18,9 +18,10 @@ export async function playLocal(msg: Message): Promise<void> {
     // conn.play(createReadStream(`/sounds/${msg.content}`), {
     //   type: 'ogg/opus',
     // })
-    const disp = conn.play(`sounds/${msg.content}`)
+    const disp = conn.play(`/sounds/${msg.content}`)
     disp.on('debug', (m: any) => console.log('dispatcher: ', m))
     disp.on('end', () => console.log('file ended'))
+    disp.on('error', console.error)
     log.debug(disp.volume)
   })
 }
