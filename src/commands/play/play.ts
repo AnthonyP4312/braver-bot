@@ -10,8 +10,8 @@ import { Message } from 'discord.js'
  *   - youtube links
  */
 export default function(msg: Message, params: string) {
-  if (isYoutube(msg.content)) return playYoutube(msg)
-  if (isHttp(msg.content)) return playHttp(msg)
+  if (isYoutube(params)) return playYoutube(msg, params)
+  if (isHttp(params)) return playHttp(msg, params)
 
   playLocal(msg, params)
 }

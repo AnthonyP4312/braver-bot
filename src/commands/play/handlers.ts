@@ -4,17 +4,17 @@ import log from 'loglevel'
 import { promises as fs } from 'fs'
 import { withConn } from '../../util/voice'
 
-export function playYoutube(msg: Message): void {
+export function playYoutube(msg: Message, params: string): void {
   withConn(msg, conn => {
-    log.debug(`playing ${msg.content} from youtube`)
-    conn.play(ytdl(msg.content, { filter: 'audioonly' })).setVolume(0.1)
+    log.debug(`playing ${params} from youtube`)
+    conn.play(ytdl(params, { filter: 'audioonly' })).setVolume(0.1)
   })
 }
 
-export async function playHttp(msg: Message): Promise<void> {
+export async function playHttp(msg: Message, params: string): Promise<void> {
   withConn(msg, conn => {
-    log.debug(`playing ${msg.content} from http`)
-    conn.play(msg.content)
+    log.debug(`playing ${params} from http`)
+    conn.play(params)
       .on('error', console.error)
       .on('end', console.log)
       .setVolume(1)
