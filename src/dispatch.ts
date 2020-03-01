@@ -58,7 +58,10 @@ export default function(msg: Message) {
 
 function parseCommand(msg: Message): Command | undefined {
   const prefix = msg.content[0]
-  const name = msg.content.split(' ')[0].substring(1)
+  const name = msg.content
+    .split(' ')[0]
+    .substring(1)
+    .toUpperCase()
   const [, ...params] = msg.content.split(' ')
 
   switch (prefix) {
