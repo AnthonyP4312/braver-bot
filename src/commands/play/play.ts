@@ -9,9 +9,9 @@ import { Message } from 'discord.js'
  *   - local files (probably not though)
  *   - youtube links
  */
-export default function(msg: Message) {
+export default function(msg: Message, params: string) {
   if (isYoutube(msg.content)) return playYoutube(msg)
   if (isHttp(msg.content)) return playHttp(msg)
 
-  playLocal(msg)
+  playLocal(msg, params)
 }
