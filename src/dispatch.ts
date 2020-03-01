@@ -1,12 +1,14 @@
 import commands from './commands'
 import { Message } from 'discord.js'
+import { client } from './main'
 
 export const enum TextCommands {
   PING,
   PLAY,
   MOVIENIGHT,
   STOP,
-  SKIP
+  SKIP,
+  SETVOLUME = "SETVOLUME"
 }
 
 export const enum ReactionCommands {
@@ -15,5 +17,9 @@ export const enum ReactionCommands {
 }
 
 export default function (msg: Message) {
-  commands.play(msg)
+  if (msg.content.startsWith(TextCommands.SETVOLUME)) {
+
+  } else {
+    commands.play(msg)
+  }
 }

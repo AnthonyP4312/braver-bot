@@ -4,17 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/main.ts",
+    "debug": "tsc; node --inspect dist/main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
+    "@types/double-ended-queue": "^2.1.1",
     "@types/ws": "^7.2.2",
     "axios": "^0.19.2",
     "discord.js": "github:discordjs/discord.js",
+    "double-ended-queue": "^2.1.0-0",
     "ffmpeg-static": "^4.0.1",
+    "ffmpeg-stream": "^0.6.0",
+    "fluent-ffmpeg": "^2.1.2",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "loglevel": "^1.6.7",
@@ -23,6 +28,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/fluent-ffmpeg": "^2.1.14",
     "@types/js-yaml": "^3.12.2",
     "@types/loglevel": "^1.6.3",
     "@types/node": "^13.7.7",

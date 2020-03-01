@@ -26,9 +26,12 @@ client.on(Events.MESSAGE_CREATE, msg => {
   }
 })
 
+client.on('debug', console.log)
+
 process.on('SIGINT', () => {
-  client.destroy()
   console.log('Brave Bot shutting down.');
+  client.destroy()
+  process.exit()
 });
 
 client.login(config.token)
