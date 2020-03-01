@@ -2,7 +2,7 @@ import { Message, VoiceConnection } from "discord.js";
 import log from "loglevel";
 
 /**
- * Given a Message, perform a callback on the given message voice connection.
+ * Given a Message, perform a callback on a connection to the author's voice channel.
  */
 export function withConn(msg: Message, callback: (conn: VoiceConnection) => void): void {
   const conn = msg.member?.voice.channel?.join()

@@ -16,7 +16,12 @@ client.on(Events.MESSAGE_CREATE, msg => {
 
   // Typecast here is acceptable as we have to specifically
   // allow partial messages
-  dispatch(msg as Message)
+  try {
+    dispatch(msg as Message)
+  } catch (e) {
+    log.error('Uncaught Error when dispatching ${msg.content}')
+    console.error(e)
+  }
 })
 
 
