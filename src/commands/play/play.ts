@@ -1,5 +1,5 @@
 import { isYoutube } from './uriValidate'
-import { playYoutube } from './handlers'
+import { playYoutube, playLocal } from './handlers'
 import { Message } from 'discord.js'
 /**
  * Given a URI attempt to play the sound correctly
@@ -11,4 +11,6 @@ import { Message } from 'discord.js'
  */
 export default function(msg: Message) {
   if (isYoutube(msg.content)) return playYoutube(msg)
+
+  playLocal(msg)
 }
