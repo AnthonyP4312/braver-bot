@@ -12,6 +12,8 @@ client.on(Events.CLIENT_READY, () => {
 })
 
 client.on(Events.MESSAGE_CREATE, msg => {
+  if (msg.author?.bot) return
+
   log.debug(`Recieved a message: ${msg.content}`)
 
   // Typecast here is acceptable as we have to specifically
@@ -24,5 +26,9 @@ client.on(Events.MESSAGE_CREATE, msg => {
   }
 })
 
+process.on('SIGINT', () => {
+  client.destroy()
+  console.log('Brave Bot shutting down.');
+});
 
 client.login(config.token)
