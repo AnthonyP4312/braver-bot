@@ -4,10 +4,11 @@ import * as log from 'loglevel'
 
 export interface Config {
   token: string,
-  loglevel: log.LogLevelDesc
+  loglevel: log.LogLevelDesc,
+  dbUrl: string
 }
 
-const config: Config = safeLoad(readFileSync('config.yml', {encoding: 'utf-8'}))
+const config: Config = safeLoad(readFileSync('config.yml', {encoding: 'utf-8'})) as Config
 
 log.setLevel(config.loglevel)
 

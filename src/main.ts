@@ -12,6 +12,7 @@ client.on(Events.CLIENT_READY, () => {
 })
 
 client.on(Events.MESSAGE_CREATE, msg => {
+  // Dont reply to bots!
   if (msg.author?.bot) return
 
   log.debug(`Recieved a message: ${msg.content}`)

@@ -1,3 +1,4 @@
 import play from './play/play'
+import addSound from './addSound'
 
-export default { play }
+export default { play, addSound }

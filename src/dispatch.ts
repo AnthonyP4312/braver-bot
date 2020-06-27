@@ -2,6 +2,7 @@ import commands from './commands'
 import { Message } from 'discord.js'
 import { client } from './main'
 import log from 'loglevel'
+import oops from './util/oops'
 
 interface TextCommand {
   PING: 'PING'
@@ -11,6 +12,7 @@ interface TextCommand {
   SKIP: 'SKIP'
   SETVOLUME: 'SETVOLUME'
   PLAYSOUND: 'PLAYSOUND'
+  ADDSOUND: 'ADDSOUND'
 }
 
 export const TextCommandEnum: TextCommand = {
@@ -21,6 +23,7 @@ export const TextCommandEnum: TextCommand = {
   SKIP: 'SKIP',
   SETVOLUME: 'SETVOLUME',
   PLAYSOUND: 'PLAYSOUND',
+  ADDSOUND: 'ADDSOUND',
 }
 
 interface ReactionCommand {
@@ -39,7 +42,7 @@ interface Command {
 }
 
 export const SOUND_PREFIX = '$'
-export const COMMAND_PREFIX = '^'
+export const COMMAND_PREFIX = '!'
 
 export default function(msg: Message) {
   // if (msg.content.startsWith(TextCommandEnum.SETVOLUME)) {
@@ -51,8 +54,10 @@ export default function(msg: Message) {
 
   log.debug('Dispatching Command', command)
   switch (command.name) {
+    case TextCommandEnum.ADDSOUND:
+      return commands.addSound(msg, command.params).catch(e => oops(msg, e))
     case TextCommandEnum.PLAY:
-      return commands.play(msg, command.params.join(' '))
+      return commands.play(msg, command.params.join(' ')).catch(e => oops(msg, e))
   }
 }
 

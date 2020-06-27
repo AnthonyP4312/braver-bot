@@ -7,14 +7,22 @@ import { withConn } from '../../util/voice'
 export function playYoutube(msg: Message, params: string): void {
   withConn(msg, conn => {
     log.debug(`playing ${params} from youtube`)
-    conn.play(ytdl(params, { filter: 'audioonly' })).setVolume(0.1)
+    conn
+      .play(
+        ytdl(params, {
+          filter: 'audioonly',
+          highWaterMark: 2 << 25,
+        }),
+      )
+      .setVolume(0.1)
   })
 }
 
-export async function playHttp(msg: Message, params: string): Promise<void> {
+export async function playHttp(msg: Message, url: string): Promise<void> {
   withConn(msg, conn => {
-    log.debug(`playing ${params} from http`)
-    conn.play(params)
+    log.debug(`playing ${url} from http`)
+    conn
+      .play(url, {highWaterMark: 2<<25})
       .on('error', console.error)
       .on('end', console.log)
       .setVolume(1)
@@ -36,9 +44,7 @@ export async function playLocal(msg: Message, params: string): Promise<void> {
       conn.play(filepath).on('error', console.error)
     })
   } catch (e) {
-    if (e.code === 'ENOENT')
-      msg.reply(`Couldn't find that file: ${file}`)
-    else
-      console.error(e)
+    if (e.code === 'ENOENT') msg.reply(`Couldn't find that file: ${file}`)
+    else console.error(e)
   }
 }
