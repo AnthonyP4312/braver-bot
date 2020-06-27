@@ -11,7 +11,7 @@ export function playYoutube(msg: Message, params: string): void {
       .play(
         ytdl(params, {
           filter: 'audioonly',
-          highWaterMark: 2 << 25,
+          highWaterMark: 500,
         }),
       )
       .setVolume(0.1)
@@ -22,7 +22,10 @@ export async function playHttp(msg: Message, url: string): Promise<void> {
   withConn(msg, conn => {
     log.debug(`playing ${url} from http`)
     conn
-      .play(url, {highWaterMark: 2<<25})
+      .play(url, {
+        fec: true,
+        highWaterMark: 500
+      })
       .on('error', console.error)
       .on('end', console.log)
       .setVolume(1)
