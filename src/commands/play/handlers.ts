@@ -4,6 +4,11 @@ import log from 'loglevel'
 import { promises as fs } from 'fs'
 import { withConn } from '../../util/voice'
 
+const defaultConfig = {
+  fec: true,
+  highWaterMark: 1 << 25,
+}
+
 export function playYoutube(msg: Message, params: string): void {
   withConn(msg, conn => {
     log.debug(`playing ${params} from youtube`)
@@ -11,7 +16,7 @@ export function playYoutube(msg: Message, params: string): void {
       .play(
         ytdl(params, {
           filter: 'audioonly',
-          highWaterMark: 500,
+          ...defaultConfig,
         }),
       )
       .setVolume(0.1)
@@ -22,10 +27,7 @@ export async function playHttp(msg: Message, url: string): Promise<void> {
   withConn(msg, conn => {
     log.debug(`playing ${url} from http`)
     conn
-      .play(url, {
-        fec: true,
-        highWaterMark: 500
-      })
+      .play(url, defaultConfig)
       .on('error', console.error)
       .on('end', console.log)
       .setVolume(1)
@@ -44,7 +46,7 @@ export async function playLocal(msg: Message, params: string): Promise<void> {
 
     withConn(msg, conn => {
       log.debug(`playing local file ${filepath}`)
-      conn.play(filepath).on('error', console.error)
+      conn.play(filepath, defaultConfig).on('error', console.error)
     })
   } catch (e) {
     if (e.code === 'ENOENT') msg.reply(`Couldn't find that file: ${file}`)
