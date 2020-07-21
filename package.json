@@ -21,7 +21,7 @@
     "ffmpeg-stream": "^0.6.0",
     "fluent-ffmpeg": "^2.1.2",
     "js-yaml": "^3.14.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "loglevel": "^1.6.8",
     "opusscript": "0.0.7",
     "slonik": "^22.4.11",
