@@ -14,7 +14,7 @@
     "@discordjs/opus": "^0.1.0",
     "@types/double-ended-queue": "^2.1.1",
     "@types/ws": "^7.2.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "discord.js": "github:discordjs/discord.js",
     "double-ended-queue": "^2.1.0-0",
     "ffmpeg-static": "^4.2.5",
